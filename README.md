@@ -1,157 +1,293 @@
-# An MCP-based Chatbot
+# ESP32-S3 AI-Powered Voice Assistant
 
-(English | [中文](README.md) | [日本語](README_ja.md))
+<div align="center">
 
-## Video
+![Project Status](https://img.shields.io/badge/Status-Active-success)
+![License](https://img.shields.io/badge/License-MIT-blue)
+![ESP-IDF](https://img.shields.io/badge/ESP--IDF-v5.4+-green)
+![Platform](https://img.shields.io/badge/Platform-ESP32--S3-orange)
 
-👉 [Human: Give AI a camera vs AI: Instantly finds out the owner hasn't washed hair for three days【bilibili】](https://www.bilibili.com/video/BV1bpjgzKEhd/)
+*A fully custom, open-source AI voice assistant powered by ESP32-S3 and Xiaozhi AI framework*
 
-👉 [Handcraft your AI girlfriend, beginner's guide【bilibili】](https://www.bilibili.com/video/BV1XnmFYLEJN/)
+[Features](#features) • [Hardware](#hardware) • [Getting Started](#getting-started) • [Documentation](#documentation) • [Contributing](#contributing)
 
-## Introduction
-
-This is an open-source ESP32 project, released under the MIT license, allowing anyone to use it for free, including for commercial purposes.
-
-We hope this project helps everyone understand AI hardware development and apply rapidly evolving large language models to real hardware devices.
-
-If you have any ideas or suggestions, please feel free to raise Issues or join the QQ group: 1011329060
-
-### Control Everything with MCP
-
-As a voice interaction entry, the XiaoZhi AI chatbot leverages the AI capabilities of large models like Qwen / DeepSeek, and achieves multi-terminal control via the MCP protocol.
-
-![Control everything via MCP](docs/mcp-based-graph.jpg)
-
-### Features Implemented
-
-- Wi-Fi / ML307 Cat.1 4G
-- Offline voice wake-up [ESP-SR](https://github.com/espressif/esp-sr)
-- Supports two communication protocols ([Websocket](docs/websocket.md) or MQTT+UDP)
-- Uses OPUS audio codec
-- Voice interaction based on streaming ASR + LLM + TTS architecture
-- Speaker recognition, identifies the current speaker [3D Speaker](https://github.com/modelscope/3D-Speaker)
-- OLED / LCD display, supports emoji display
-- Battery display and power management
-- Multi-language support (Chinese, English, Japanese)
-- Supports ESP32-C3, ESP32-S3, ESP32-P4 chip platforms
-- Device-side MCP for device control (Speaker, LED, Servo, GPIO, etc.)
-- Cloud-side MCP to extend large model capabilities (smart home control, PC desktop operation, knowledge search, email, etc.)
-
-## Hardware
-
-### Breadboard DIY Practice
-
-See the Feishu document tutorial:
-
-👉 ["XiaoZhi AI Chatbot Encyclopedia"](https://ccnphfhqs21z.feishu.cn/wiki/F5krwD16viZoF0kKkvDcrZNYnhb?from=from_copylink)
-
-Breadboard demo:
-
-![Breadboard Demo](docs/v1/wiring2.jpg)
-
-### Supports 70+ Open Source Hardware (Partial List)
-
-- <a href="https://oshwhub.com/li-chuang-kai-fa-ban/li-chuang-shi-zhan-pai-esp32-s3-kai-fa-ban" target="_blank" title="LiChuang ESP32-S3 Development Board">LiChuang ESP32-S3 Development Board</a>
-- <a href="https://github.com/espressif/esp-box" target="_blank" title="Espressif ESP32-S3-BOX3">Espressif ESP32-S3-BOX3</a>
-- <a href="https://docs.m5stack.com/zh_CN/core/CoreS3" target="_blank" title="M5Stack CoreS3">M5Stack CoreS3</a>
-- <a href="https://docs.m5stack.com/en/atom/Atomic%20Echo%20Base" target="_blank" title="AtomS3R + Echo Base">M5Stack AtomS3R + Echo Base</a>
-- <a href="https://gf.bilibili.com/item/detail/1108782064" target="_blank" title="Magic Button 2.4">Magic Button 2.4</a>
-- <a href="https://www.waveshare.net/shop/ESP32-S3-Touch-AMOLED-1.8.htm" target="_blank" title="Waveshare ESP32-S3-Touch-AMOLED-1.8">Waveshare ESP32-S3-Touch-AMOLED-1.8</a>
-- <a href="https://github.com/Xinyuan-LilyGO/T-Circle-S3" target="_blank" title="LILYGO T-Circle-S3">LILYGO T-Circle-S3</a>
-- <a href="https://oshwhub.com/tenclass01/xmini_c3" target="_blank" title="XiaGe Mini C3">XiaGe Mini C3</a>
-- <a href="https://oshwhub.com/movecall/cuican-ai-pendant-lights-up-y" target="_blank" title="Movecall CuiCan ESP32S3">CuiCan AI Pendant</a>
-- <a href="https://github.com/WMnologo/xingzhi-ai" target="_blank" title="WMnologo-Xingzhi-1.54">WMnologo-Xingzhi-1.54TFT</a>
-- <a href="https://www.seeedstudio.com/SenseCAP-Watcher-W1-A-p-5979.html" target="_blank" title="SenseCAP Watcher">SenseCAP Watcher</a>
-- <a href="https://www.bilibili.com/video/BV1BHJtz6E2S/" target="_blank" title="ESP-HI Low Cost Robot Dog">ESP-HI Low Cost Robot Dog</a>
-
-<div style="display: flex; justify-content: space-between;">
-  <a href="docs/v1/lichuang-s3.jpg" target="_blank" title="LiChuang ESP32-S3 Development Board">
-    <img src="docs/v1/lichuang-s3.jpg" width="240" />
-  </a>
-  <a href="docs/v1/espbox3.jpg" target="_blank" title="Espressif ESP32-S3-BOX3">
-    <img src="docs/v1/espbox3.jpg" width="240" />
-  </a>
-  <a href="docs/v1/m5cores3.jpg" target="_blank" title="M5Stack CoreS3">
-    <img src="docs/v1/m5cores3.jpg" width="240" />
-  </a>
-  <a href="docs/v1/atoms3r.jpg" target="_blank" title="AtomS3R + Echo Base">
-    <img src="docs/v1/atoms3r.jpg" width="240" />
-  </a>
-  <a href="docs/v1/magiclick.jpg" target="_blank" title="Magic Button 2.4">
-    <img src="docs/v1/magiclick.jpg" width="240" />
-  </a>
-  <a href="docs/v1/waveshare.jpg" target="_blank" title="Waveshare ESP32-S3-Touch-AMOLED-1.8">
-    <img src="docs/v1/waveshare.jpg" width="240" />
-  </a>
-  <a href="docs/v1/lilygo-t-circle-s3.jpg" target="_blank" title="LILYGO T-Circle-S3">
-    <img src="docs/v1/lilygo-t-circle-s3.jpg" width="240" />
-  </a>
-  <a href="docs/v1/xmini-c3.jpg" target="_blank" title="XiaGe Mini C3">
-    <img src="docs/v1/xmini-c3.jpg" width="240" />
-  </a>
-  <a href="docs/v1/movecall-cuican-esp32s3.jpg" target="_blank" title="CuiCan">
-    <img src="docs/v1/movecall-cuican-esp32s3.jpg" width="240" />
-  </a>
-  <a href="docs/v1/wmnologo_xingzhi_1.54.jpg" target="_blank" title="WMnologo-Xingzhi-1.54">
-    <img src="docs/v1/wmnologo_xingzhi_1.54.jpg" width="240" />
-  </a>
-  <a href="docs/v1/sensecap_watcher.jpg" target="_blank" title="SenseCAP Watcher">
-    <img src="docs/v1/sensecap_watcher.jpg" width="240" />
-  </a>
-  <a href="docs/v1/esp-hi.jpg" target="_blank" title="ESP-HI Low Cost Robot Dog">
-    <img src="docs/v1/esp-hi.jpg" width="240" />
-  </a>
 </div>
 
-## Software
+---
 
-### Firmware Flashing
+## 📋 Overview
 
-For beginners, it is recommended to use the firmware that can be flashed without setting up a development environment.
+This project is a complete DIY AI voice assistant built around the ESP32-S3 microcontroller. It combines custom PCB design, advanced audio processing, and cloud-based AI to create a device that rivals commercial smart speakers in functionality while remaining fully open-source and customizable.
 
-The firmware connects to the official [xiaozhi.me](https://xiaozhi.me) server by default. Personal users can register an account to use the Qwen real-time model for free.
+Unlike simple voice-controlled devices, this assistant leverages the **Xiaozhi AI framework** to provide natural language understanding through large language models (LLMs) like Qwen, DeepSeek, and GPT. The system uses a hybrid architecture: lightweight tasks run locally on the ESP32-S3, while computationally intensive AI processing happens on cloud servers.
 
-👉 [Beginner's Firmware Flashing Guide](https://ccnphfhqs21z.feishu.cn/wiki/Zpz4wXBtdimBrLk25WdcXzxcnNS)
+### Key Highlights
 
-### Development Environment
+- ✨ **Natural Conversation**: Powered by modern LLMs for intelligent, context-aware responses
+- 🎙️ **Dual-Microphone Array**: Advanced audio capture with beamforming and echo cancellation
+- 🔋 **Battery Powered**: Complete power management with USB-C charging and portable operation
+- 💡 **WS2812B LED Ring**: Visual feedback with customizable animations
+- 🏠 **Smart Home Ready**: Integration with Home Assistant and other platforms
+- 🔧 **Fully Customizable**: Open hardware and software for endless possibilities
+- 📱 **Web-Based Control**: Easy configuration through Xiaozhi console
+- 🌐 **Multi-Language**: Support for multiple languages depending on AI model
 
-- Cursor or VSCode
-- Install ESP-IDF plugin, select SDK version 5.4 or above
-- Linux is better than Windows for faster compilation and fewer driver issues
-- This project uses Google C++ code style, please ensure compliance when submitting code
+---
 
-### Developer Documentation
+## 🎯 Features
 
-- [Custom Board Guide](main/boards/README.md) - Learn how to create custom boards for XiaoZhi AI
-- [MCP Protocol IoT Control Usage](docs/mcp-usage.md) - Learn how to control IoT devices via MCP protocol
-- [MCP Protocol Interaction Flow](docs/mcp-protocol.md) - Device-side MCP protocol implementation
-- [A detailed WebSocket communication protocol document](docs/websocket.md)
+### Hardware Features
+- **ESP32-S3-WROOM-1-N16R8** (Dual-core, 16MB Flash, 8MB PSRAM)
+- **Dual ICS-43434 MEMS Microphones** for superior audio capture
+- **MAX98357A I²S Amplifier** driving 3W speaker
+- **BQ24250 Li-Ion Charger** with USB-C power delivery
+- **MAX20402 Buck-Boost Regulator** for stable 3.3V output
+- **WS2812B RGB LED Ring** for visual status indication
+- **Optional OLED Display** header for screen integration
+- **Compact PCB Design** (2-layer, professionally fabricated)
+- **Custom 3D-Printed Enclosure** optimized for acoustics
 
-## Large Model Configuration
+### Software Features
+- **Wake Word Detection** using Espressif's WakeNet
+- **Audio Front-End (AFE)** with noise reduction and echo cancellation
+- **WebSocket Communication** for low-latency server connection
+- **Multiple AI Models** (Qwen, DeepSeek, GPT-4, and more)
+- **Conversation History** and context awareness
+- **Voice Profile Support** for personalized responses
+- **Smart Home Integration** via Xiaozhi skill marketplace
+- **OTA Updates** for firmware upgrades
+- **Battery Monitoring** with low-battery alerts
 
-If you already have a XiaoZhi AI chatbot device and have connected to the official server, you can log in to the [xiaozhi.me](https://xiaozhi.me) console for configuration.
+---
 
-👉 [Backend Operation Video Tutorial (Old Interface)](https://www.bilibili.com/video/BV1jUCUY2EKM/)
+## 🛠️ Hardware
 
-## Related Open Source Projects
+### Bill of Materials (BOM)
 
-For server deployment on personal computers, refer to the following open-source projects:
+| Component | Part Number | Quantity | Notes |
+|-----------|------------|----------|-------|
+| Microcontroller | ESP32-S3-WROOM-1-N16R8 | 1 | Main processor |
+| Microphones | TDK InvenSense ICS-43434 | 2 | Digital MEMS |
+| Audio Amplifier | MAX98357AETE+ | 1 | Class-D I²S |
+| Battery Charger | BQ24250RGER | 1 | Li-Ion charging IC |
+| DC-DC Converter | MAX20402ATGA/+ | 1 | Buck-boost regulator |
+| RGB LEDs | WS2812B-5050 | 8-12 | Addressable LEDs |
+| USB-C Connector | USB4105-GF-A | 1 | Power & programming |
+| Speaker | 3W 4Ω Cavity Speaker | 1 | Audio output |
+| Battery | Li-Ion/LiPo 3.7V | 1 | 2000-3000mAh recommended |
+| Capacitors | Various (0603/0805) | ~25 | See full BOM |
+| Resistors | Various (0603) | ~15 | See full BOM |
+| Switches | 6x6mm Tactile | 2 | Reset & Boot |
+| TVS Diode | USBLC6-2SC6 | 1 | USB ESD protection |
 
-- [xinnan-tech/xiaozhi-esp32-server](https://github.com/xinnan-tech/xiaozhi-esp32-server) Python server
-- [joey-zhou/xiaozhi-esp32-server-java](https://github.com/joey-zhou/xiaozhi-esp32-server-java) Java server
-- [AnimeAIChat/xiaozhi-server-go](https://github.com/AnimeAIChat/xiaozhi-server-go) Golang server
+**📥 Full BOM with part numbers**: [Download BOM.csv](hardware/BOM.csv)
 
-Other client projects using the XiaoZhi communication protocol:
+### PCB Design
 
-- [huangjunsen0406/py-xiaozhi](https://github.com/huangjunsen0406/py-xiaozhi) Python client
-- [TOM88812/xiaozhi-android-client](https://github.com/TOM88812/xiaozhi-android-client) Android client
+The custom PCB is a 2-layer design measuring approximately 80x60mm with careful attention to:
+- Signal integrity for I²S audio
+- Power distribution with minimal noise
+- Thermal management for power ICs
+- Acoustic isolation between microphones and speaker
 
-## Star History
 
-<a href="https://star-history.com/#78/xiaozhi-esp32&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=78/xiaozhi-esp32&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=78/xiaozhi-esp32&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=78/xiaozhi-esp32&type=Date" />
- </picture>
-</a> 
+### 3D Enclosure
+
+The enclosure is designed for FDM 3D printing with features for:
+- Acoustic optimization (speaker grille, microphone ports)
+- LED light diffusion ring
+- USB-C and button access
+- Battery compartment
+- Ventilation slots
+
+**🖨️ 3D Files**:
+- `enclosure/base.stl` - Bottom tray
+- `enclosure/top.stl` - Top cover
+- `enclosure/led-ring.stl` - LED diffuser
+- `enclosure/assembly.step` - Full assembly (STEP format)
+
+**Printing Recommendations**:
+- Material: PLA or PETG
+- Layer Height: 0.2mm
+- Infill: 20%
+- Supports: Required for speaker grille
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+**Hardware Tools**:
+- Soldering iron and supplies
+- Multimeter for testing
+- USB-C cable (data capable)
+- 3D printer (optional, for enclosure)
+
+**Software Requirements**:
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [ESP-IDF Extension for VS Code](https://marketplace.visualstudio.com/items?itemName=espressif.esp-idf-extension)
+- ESP-IDF v5.4 or newer
+- Git
+
+### Step 1: Hardware Assembly
+
+1. **Order PCB**: Upload `hardware/gerbers/gerbers.zip` to JLCPCB, PCBWay, or ALLPCB
+2. **Source Components**: Use the BOM to order parts from DigiKey, Mouser, or LCSC
+3. **Assemble PCB**: Follow the [assembly guide](docs/ASSEMBLY.md) for soldering instructions
+4. **3D Print Enclosure**: Print the STL files and assemble
+
+**Detailed Assembly Guide**: [docs/ASSEMBLY.md](docs/ASSEMBLY.md)
+
+
+### Step 2: WiFi Configuration
+
+On first boot, the device creates a WiFi access point:
+
+1. Connect to WiFi network: `Xioazhi`
+2. Navigate to `http://192.168.4.1`
+3. Enter your WiFi credentials
+4. Device will restart and connect to your network
+
+**Alternative**: Configure WiFi via `idf.py menuconfig` before flashing
+
+### Step 3: Xiaozhi Cloud Setup
+
+1. Create account at [xiaozhi.me](https://xiaozhi.me)
+2. Navigate to [Console → Agents](https://xiaozhi.me/console/agents)
+3. Click "Add Device" to generate Device ID and Pairing Code
+4. Device will auto-pair on first cloud connection
+5. Customize AI personality, voice, and skills through console
+
+**Detailed Setup Guide**: [docs/SETUP.md](docs/SETUP.md)
+
+### Step 4: Test Your Assistant
+
+1. Say the wake word: **"Hey Wanda"**
+2. Wait for LED confirmation (blue pulse)
+3. Speak your question or command
+4. Assistant responds through speaker
+5. LED returns to idle state
+
+---
+
+## 📚 Documentation
+
+- **[Assembly Guide](docs/ASSEMBLY.md)** - Step-by-step hardware assembly
+- **[Setup Guide](docs/SETUP.md)** - Firmware configuration and first boot
+- **[Firmware Guide](docs/FIRMWARE.md)** - Building and customizing firmware
+- **[Xiaozhi Integration](docs/XIAOZHI.md)** - Cloud service setup and features
+- **[Hardware Design](docs/HARDWARE.md)** - PCB design decisions and modifications
+- **[Troubleshooting](docs/TROUBLESHOOTING.md)** - Common issues and solutions
+- **[FAQ](docs/FAQ.md)** - Frequently asked questions
+- **[API Reference](docs/API.md)** - Firmware API documentation
+
+---
+
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+### Reporting Bugs
+- Use GitHub Issues with detailed reproduction steps
+- Include serial monitor logs
+- Specify hardware revision and firmware version
+
+### Feature Requests
+- Open a GitHub Issue with [Feature Request] tag
+- Describe use case and benefits
+- Discuss implementation approach
+
+### Pull Requests
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
+
+**Contribution Guidelines**: [CONTRIBUTING.md](CONTRIBUTING.md)
+
+---
+
+## 📊 Project Status
+
+- [x] PCB Design and fabrication
+- [x] Firmware core functionality
+- [x] Xiaozhi cloud integration
+- [x] Basic voice interaction
+- [x] 3D enclosure design
+- [ ] Multi-device mesh networking
+- [ ] Offline mode with local LLM
+- [ ] Custom wake word training tools
+- [ ] Mobile app for configuration
+- [ ] Additional language packs
+
+**Roadmap**: [ROADMAP.md](ROADMAP.md)
+
+---
+
+## 📸 Gallery
+
+<div align="center">
+
+### Assembled PCB
+![PCB Front](docs/images/pcb-front.jpg)
+![PCB Back](docs/images/pcb-back.jpg)
+
+### 3D Enclosure
+![Enclosure](docs/images/enclosure.jpg)
+![Assembly](docs/images/assembly.jpg)
+
+### In Action
+![Working Device](docs/images/working.gif)
+
+</div>
+
+---
+
+## 🔗 Related Projects
+
+- [Xiaozhi ESP32](https://github.com/78/xiaozhi-esp32) - Official Xiaozhi firmware
+- [ESP-IDF](https://github.com/espressif/esp-idf) - Espressif IoT Development Framework
+- [WakeNet](https://github.com/espressif/esp-sr) - Espressif speech recognition
+- [Home Assistant](https://www.home-assistant.io/) - Smart home integration
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
+
+### Third-Party Licenses
+- ESP-IDF: Apache 2.0
+- Xiaozhi Framework: MIT
+- Component datasheets: Respective manufacturers
+
+---
+
+## 🙏 Acknowledgments
+
+- **Espressif Systems** for the amazing ESP32-S3 platform and development tools
+- **Xiaozhi Team** for creating and maintaining the AI framework
+- **Open-source community** for countless libraries and examples
+- **PCB manufacturers** (JLCPCB, PCBWay) for affordable prototyping
+- **Everyone** who contributed feedback, testing, and improvements
+
+---
+
+
+
+**Xiaozhi Community**:
+- Forum: [xiaozhi.me/community](https://xiaozhi.me/community)
+- Documentation: [docs.xiaozhi.me](https://docs.xiaozhi.me)
+
+
+
+<div align="center">
+
+**Built with ❤️ by makers, for makers**
+
+[Documentation](docs/) • [Hardware Files](hardware/) • [Firmware](firmware/) • [Community](https://github.com/yourusername/esp32s3-voice-assistant/discussions)
+
+</div>
