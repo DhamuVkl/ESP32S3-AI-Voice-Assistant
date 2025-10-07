@@ -1,6 +1,6 @@
 # ESP32-S3 AI-Powered Voice Assistant
 
-<div align="center">
+
 
 ![Project Status](https://img.shields.io/badge/Status-Active-success)
 ![License](https://img.shields.io/badge/License-MIT-blue)
@@ -9,7 +9,6 @@
 
 *A fully custom, open-source AI voice assistant powered by ESP32-S3 and Xiaozhi AI framework*
 
-[Features](#features) • [Hardware](#hardware) • [Getting Started](#getting-started) • [Documentation](#documentation) • [Contributing](#contributing)
 
 </div>
 
