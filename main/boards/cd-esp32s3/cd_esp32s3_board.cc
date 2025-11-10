@@ -7,9 +7,9 @@
 #include "config.h"
 #include "mcp_server.h"
 #include "lamp_controller.h"
+#include "traffic_light_controller.h"
 #include "led/circular_strip.h"
 #include "assets/lang_config.h"
-
 
 #include <wifi_station.h>
 #include <esp_log.h>
@@ -151,15 +151,12 @@ private:
             GetDisplay()->ShowNotification(Lang::Strings::MUTED); });
     }
 
- 
-
     // 物联网初始化，逐步迁移到 MCP 协议
     void InitializeTools()
     {
         static LampController lamp(LAMP_GPIO);
+        static TrafficLightController traffic_light(RED_LED_GPIO, YELLOW_LED_GPIO, GREEN_LED_GPIO);
     }
-
-   
 
 public:
     CompactWifiBoard() : boot_button_(BOOT_BUTTON_GPIO),
@@ -174,8 +171,7 @@ public:
 
         // Initialize the CircularStrip with GPIO and number of LEDs
         led_strip_ = new CircularStrip(BUILTIN_LED_GPIO, 4); //  LEDs in the strip
-        led_strip_->SetBrightness(255, 4);                    // Increase brightness (default: 32, 4)
-
+        led_strip_->SetBrightness(255, 4);                   // Increase brightness (default: 32, 4)
     }
 
     virtual ~CompactWifiBoard()
@@ -204,7 +200,6 @@ public:
     {
         return display_;
     }
-
 };
 
 DECLARE_BOARD(CompactWifiBoard);
