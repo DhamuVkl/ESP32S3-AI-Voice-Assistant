@@ -222,26 +222,6 @@ Contributions are welcome! Here's how you can help:
 - [ ] Mobile app for configuration
 - [ ] Additional language packs
 
-**Roadmap**: [ROADMAP.md](ROADMAP.md)
-
----
-
-## 📸 Gallery
-
-<div align="center">
-
-### Assembled PCB
-![PCB Front](docs/images/pcb-front.jpg)
-![PCB Back](docs/images/pcb-back.jpg)
-
-### 3D Enclosure
-![Enclosure](docs/images/enclosure.jpg)
-![Assembly](docs/images/assembly.jpg)
-
-### In Action
-![Working Device](docs/images/working.gif)
-
-</div>
 
 ---
 
