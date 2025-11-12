@@ -99,19 +99,6 @@ The enclosure is designed for FDM 3D printing with features for:
 - Battery compartment
 - Ventilation slots
 
-**🖨️ 3D Files**:
-- `enclosure/base.stl` - Bottom tray
-- `enclosure/top.stl` - Top cover
-- `enclosure/led-ring.stl` - LED diffuser
-- `enclosure/assembly.step` - Full assembly (STEP format)
-
-**Printing Recommendations**:
-- Material: PLA or PETG
-- Layer Height: 0.2mm
-- Infill: 20%
-- Supports: Required for speaker grille
-
----
 
 ## 🚀 Getting Started
 
@@ -133,10 +120,10 @@ The enclosure is designed for FDM 3D printing with features for:
 
 1. **Order PCB**: Upload `hardware/gerbers/gerbers.zip` to JLCPCB, PCBWay, or ALLPCB
 2. **Source Components**: Use the BOM to order parts from DigiKey, Mouser, or LCSC
-3. **Assemble PCB**: Follow the [assembly guide](docs/ASSEMBLY.md) for soldering instructions
+3. **Assemble PCB**: Follow the assembly guide for soldering instructions
 4. **3D Print Enclosure**: Print the STL files and assemble
 
-**Detailed Assembly Guide**: [docs/ASSEMBLY.md](docs/ASSEMBLY.md)
+
 
 
 ### Step 2: WiFi Configuration
@@ -158,7 +145,7 @@ On first boot, the device creates a WiFi access point:
 4. Device will auto-pair on first cloud connection
 5. Customize AI personality, voice, and skills through console
 
-**Detailed Setup Guide**: [docs/SETUP.md](docs/SETUP.md)
+
 
 ### Step 4: Test Your Assistant
 
@@ -167,19 +154,6 @@ On first boot, the device creates a WiFi access point:
 3. Speak your question or command
 4. Assistant responds through speaker
 5. LED returns to idle state
-
----
-
-## 📚 Documentation
-
-- **[Assembly Guide](docs/ASSEMBLY.md)** - Step-by-step hardware assembly
-- **[Setup Guide](docs/SETUP.md)** - Firmware configuration and first boot
-- **[Firmware Guide](docs/FIRMWARE.md)** - Building and customizing firmware
-- **[Xiaozhi Integration](docs/XIAOZHI.md)** - Cloud service setup and features
-- **[Hardware Design](docs/HARDWARE.md)** - PCB design decisions and modifications
-- **[Troubleshooting](docs/TROUBLESHOOTING.md)** - Common issues and solutions
-- **[FAQ](docs/FAQ.md)** - Frequently asked questions
-- **[API Reference](docs/API.md)** - Firmware API documentation
 
 ---
 
@@ -198,12 +172,7 @@ Contributions are welcome! Here's how you can help:
 - Describe use case and benefits
 - Discuss implementation approach
 
-### Pull Requests
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
+
 
 **Contribution Guidelines**: [CONTRIBUTING.md](CONTRIBUTING.md)
 
