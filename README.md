@@ -1,4 +1,4 @@
-# ESP32-S3 AI-Powered Voice Assistant
+# Design your own AI voice assistant 
 
 
 
