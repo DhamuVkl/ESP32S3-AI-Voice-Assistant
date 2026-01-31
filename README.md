@@ -1,4 +1,4 @@
-# ESP32-S3 AI-Powered Voice Assistant
+# Design your own AI voice assistant 
 
 
 
@@ -79,7 +79,7 @@ Unlike simple voice-controlled devices, this assistant leverages the **Xiaozhi A
 | Switches | 6x6mm Tactile | 2 | Reset & Boot |
 | TVS Diode | USBLC6-2SC6 | 1 | USB ESD protection |
 
-**📥 Full BOM with part numbers**: [Download BOM.csv](hardware/BOM.csv)
+**📥 Full BOM with part numbers**: [Download BOM.csv](Hardware/PCB/BOM/ESP-AI-Assistant-BOM.xlsx)
 
 ### PCB Design
 
